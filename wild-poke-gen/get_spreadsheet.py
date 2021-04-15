@@ -1,4 +1,5 @@
 import gspread
+
 def get_spreadsheet(): 
     # Have to set up gspread - change directory to 
     # wherever you save the service account file.
