@@ -1,4 +1,4 @@
-import fill_shell, get_spreadsheet, remove_slash, stat_grab
+from poke_gen import fill_shell, get_spreadsheet, remove_slash, stat_grab
 import json
 
 # gspread set-up
