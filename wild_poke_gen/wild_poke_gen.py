@@ -1,4 +1,4 @@
-from poke_gen import fillshell, getspreadsheet, rmslash, statgrab
+from poke_gen import fillshell, getspreadsheet, statgrab
 import json
 
 # gspread set-up
@@ -20,7 +20,7 @@ while True:
 statgrab.grab(stats, wild_poke)    
 
 # Clean the extra forward slashes on single-typed Pokémon
-rmslash.clean(stats, c_type)
+statgrab.clean(stats, c_type)
 
 # Fill the JSON shell with all of the stripped data
 fillshell.fill(num_of_pokemon, players, stats, season, c_type)

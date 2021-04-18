@@ -25,3 +25,10 @@ def grab(stats, wild_poke):
             stats[20].append(t[23])
             stats[21].append(t[24])
     return stats
+
+def clean(stats, c_type):
+    for poke_type in stats[0]:
+        if poke_type.endswith('/'):
+            poke_type = poke_type.rstrip("/")
+        c_type.append(poke_type)
+    return c_type
