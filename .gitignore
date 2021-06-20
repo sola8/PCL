@@ -1,6 +1,7 @@
+dist/
 build/
 tests/
 *.json
 *.spec
-**/__pycache
+**/__pycache__
 wild-poke-env/
