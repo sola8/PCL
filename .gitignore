@@ -1,0 +1,6 @@
+build/
+tests/
+*.json
+*.spec
+**/__pycache
+wild-poke-env/
