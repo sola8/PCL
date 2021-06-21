@@ -1,7 +1,11 @@
+## Junk
 dist/
+wild-poke-env/
 build/
 tests/
+
+## Output files
 *.json
 *.spec
 **/__pycache__
-wild-poke-env/
+
