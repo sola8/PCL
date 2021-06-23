@@ -9,3 +9,6 @@ tests/
 *.spec
 **/__pycache__
 
+# Secret
+config.py
+
