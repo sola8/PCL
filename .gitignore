@@ -11,4 +11,5 @@ tests/
 
 # Secret
 config.py
+tests.py
 

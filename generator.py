@@ -12,16 +12,16 @@ currentYear = PCL["gameAttributes"]["season"]
 wild_pokemon = get_spreadsheet()
 
 for pokemon in wild_pokemon:
-    for pokemon_attributes in pokemon:
+    for pokemon_stats in pokemon:
         shell = ({
             
-            "firstName": name(pokemon_attributes),
-            "lastName": f"({pokemon_attributes[4]})",
+            "firstName": findName(pokemon_stats),
+            "lastName": f"({pokemon_stats[4]})",
             "college": "",
             "tid": -1,
-            "imgURL": image(pokemon_attributes),
-            "hgt": int(pokemon_attributes[10]),
-            "weight": int(pokemon_attributes[11]), 
+            "imgURL": findImage(pokemon_stats),
+            "hgt": int(pokemon_stats[10]),
+            "weight": int(pokemon_stats[11]), 
             "draft": {
                 "round": 0,
                 "pick": 0,
@@ -33,26 +33,26 @@ for pokemon in wild_pokemon:
                 "skills": []
             },
             "born": {
-                "year": currentYear - int(pokemon_attributes[12]),
-                "loc": type(pokemon_attributes)
+                "year": currentYear - int(pokemon_stats[12]),
+                "loc": type(pokemon_stats)
             },
             "ratings": [
                 { 
-                "hgt": int(pokemon_attributes[13]),
-                "stre": int(pokemon_attributes[14]),
-                "spd": int(pokemon_attributes[15]),
-                "jmp": int(pokemon_attributes[16]),
-                "endu": int(pokemon_attributes[17]),
-                "ins": int(pokemon_attributes[18]),
-                "dnk": int(pokemon_attributes[19]),
-                "ft": int(pokemon_attributes[20]),
-                "fg": int(pokemon_attributes[21]),
-                "tp": int(pokemon_attributes[22]),
-                "oiq": int(pokemon_attributes[23]),
-                "diq": int(pokemon_attributes[24]),
-                "drb": int(pokemon_attributes[25]),
-                "pss": int(pokemon_attributes[26]),
-                "reb": int(pokemon_attributes[27]), 
+                "hgt": int(pokemon_stats[13]),
+                "stre": int(pokemon_stats[14]),
+                "spd": int(pokemon_stats[15]),
+                "jmp": int(pokemon_stats[16]),
+                "endu": int(pokemon_stats[17]),
+                "ins": int(pokemon_stats[18]),
+                "dnk": int(pokemon_stats[19]),
+                "ft": int(pokemon_stats[20]),
+                "fg": int(pokemon_stats[21]),
+                "tp": int(pokemon_stats[22]),
+                "oiq": int(pokemon_stats[23]),
+                "diq": int(pokemon_stats[24]),
+                "drb": int(pokemon_stats[25]),
+                "pss": int(pokemon_stats[26]),
+                "reb": int(pokemon_stats[27]), 
                 "season": (currentYear)
                 }
             ]
