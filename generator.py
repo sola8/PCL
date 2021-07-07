@@ -6,62 +6,54 @@ from utils import *
 
 with urllib.request.urlopen(PCL_EXPORT) as f:
     PCL = json.loads(f.read().decode('utf-8-sig'))
+    currentYear = PCL["gameAttributes"]["season"]
 
-currentYear = PCL["gameAttributes"]["season"]
+ws = get_spreadsheet()
 
-wild_pokemon = get_spreadsheet()
+print("This is PCL's Wild Pokemon Generator.")
+print("-------------------------------------")
 
-for pokemon in wild_pokemon:
-    for pokemon_stats in pokemon:
-        shell = ({
-            
-            "firstName": findName(pokemon_stats),
-            "lastName": f"({pokemon_stats[4]})",
-            "college": "",
-            "tid": -1,
-            "imgURL": findImage(pokemon_stats),
-            "hgt": int(pokemon_stats[10]),
-            "weight": int(pokemon_stats[11]), 
-            "draft": {
-                "round": 0,
-                "pick": 0,
-                "tid": -1,
-                "originalTid": -1,
-                "year": (currentYear - 1),
-                "pot": 0,
-                "ovr": 0,
-                "skills": []
-            },
-            "born": {
-                "year": currentYear - int(pokemon_stats[12]),
-                "loc": type(pokemon_stats)
-            },
-            "ratings": [
-                { 
-                "hgt": int(pokemon_stats[13]),
-                "stre": int(pokemon_stats[14]),
-                "spd": int(pokemon_stats[15]),
-                "jmp": int(pokemon_stats[16]),
-                "endu": int(pokemon_stats[17]),
-                "ins": int(pokemon_stats[18]),
-                "dnk": int(pokemon_stats[19]),
-                "ft": int(pokemon_stats[20]),
-                "fg": int(pokemon_stats[21]),
-                "tp": int(pokemon_stats[22]),
-                "oiq": int(pokemon_stats[23]),
-                "diq": int(pokemon_stats[24]),
-                "drb": int(pokemon_stats[25]),
-                "pss": int(pokemon_stats[26]),
-                "reb": int(pokemon_stats[27]), 
-                "season": (currentYear)
-                }
-            ]
-            })
-        PCL['players'].append(shell)
+while True:
 
-NEW_FILE = PATH_TO_NEW_EXPORT.replace(".json", "_created.json")
+        print("Options:")
+        print("W - Press W to insert Wild Pokemon")
+        print("S - Press S to insert Surprise Tool Pokemon")
+        print("P - Press P to insert Professor Gift Pokemon")
+        print("T - Press T to insert Spawn Tool Pokemon")
+        print("-------------------------------------")
+        option = input("Input the letter of choice: ").strip().upper()
 
-with open(NEW_FILE, "w"):
-    print("Creating export...")
-    json.dump(PCL, NEW_FILE)
-    print("Export done.")
+        if (option == "W"):
+            print("Getting Wild Pokemon...")
+            wild_pokemon = ws.batch_get([WILD_POKEMON_RANGE], major_dimension='ROWS')
+            print("Inputting wild pokemon into the export...")
+            wildFill(wild_pokemon, currentYear, PCL)
+            break
+        elif (option == "S"):
+            surprise_trade = ws.batch_get([SURPRISE_TRADE], major_dimension='ROWS')
+            print("-------------------------------------")
+            print("Teams:")
+            for team in PCL["teams"]:
+                print(f"{team['tid']} - {team['region']} {team['name']}")
+            print("-------------------------------------")
+            tid = input("What team is this pokemon on? Input tid: ")
+            surpriseFill(surprise_trade, currentYear, PCL, tid)
+            break
+        elif (option == "P"):
+            prof_gift = ws.batch_get([PROFESSOR_GIFT], major_dimension='ROWS')
+            print("-------------------------------------")
+            print("Teams:")
+            for team in PCL["teams"]:
+                print(f"{team['tid']} - {team['region']} {team['name']}")
+            print("-------------------------------------")
+            tid = input("What team is this pokemon on? Input tid: ")
+            giftFill(prof_gift, currentYear, PCL, tid)
+            break
+        elif (option == "T"):
+            print("Getting Spawn Tool Pokemon...")
+            spawn_tool = ws.batch_get([SPAWN_TOOL], major_dimension='ROWS')
+            print("Inputting Spawn Tool Pokemon into the export...")
+            stFill(spawn_tool, currentYear, PCL)
+            break
+
+print("-------------------------------------")
