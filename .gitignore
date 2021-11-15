@@ -1,8 +1,10 @@
 ## Junk
 dist/
-wild-poke-env/
+wpg-env/
 build/
 tests/
+service_account/
+exports/
 
 ## Output files
 *.json
@@ -11,5 +13,3 @@ tests/
 
 # Secret
 config.py
-tests.py
-
